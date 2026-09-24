@@ -14,23 +14,23 @@ typedef struct {
     Coordenadap localizacaop;
 } Pokemon;
 
-void inicializar_pokemon(Pokemon *p, int id, int numpoke, const char *nome, const char *tipo, Coordenadap localizacaop);
+void inicializar_pokemon(Pokemon *p, int id, int numpoke, char *nome, char *tipo, Coordenadap localizacaop);
 
-int pokemon_get_id(const Pokemon *p);
+int pokemon_get_id(Pokemon *p);
 void pokemon_set_id(Pokemon *p, int id);
 
-int pokemon_get_numpoke(const Pokemon *p);
+int pokemon_get_numpoke(Pokemon *p);
 void pokemon_set_numpoke(Pokemon *p, int numpoke);
 
-void pokemon_get_nome(const Pokemon *p, char *nome, int tamanho);
-void pokemon_set_nome(Pokemon *p, const char *nome);
+void pokemon_get_nome(Pokemon *p);
+void pokemon_set_nome(Pokemon *p, char *nome);
 
-void pokemon_get_tipo(const Pokemon *p, char *tipo, int tamanho);
-void pokemon_set_tipo(Pokemon *p, const char *tipo);
+void pokemon_get_tipo(Pokemon *p);
+void pokemon_set_tipo(Pokemon *p, char *tipo);
 
-Coordenadap pokemon_get_localizacao(const Pokemon *p);
+Coordenadap pokemon_get_localizacao(Pokemon *p);
 void pokemon_set_localizacao(Pokemon *p, Coordenadap localizacaop);
 
-void pokemon_imprimir(const Pokemon *p);
+void pokemon_imprimir(Pokemon *p);
 
 #endif
