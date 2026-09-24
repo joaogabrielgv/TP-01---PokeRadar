@@ -10,6 +10,7 @@ typedef struct Celula {
 
 typedef struct{
     struct Celula *pPrimeiro;
+    struct Celula *pUltimo;
 }PokeLista;
 
 void pokelista_inicializar(PokeLista *lista);
