@@ -15,11 +15,11 @@ typedef struct{
 
 void pokelista_inicializar(PokeLista *lista);
 
-void pokelista_inserir(PokeLista *lista, Pokemon p);
+void pokelista_inserir(PokeLista *lista, Pokemon* p);
 
-int pokelista_remover(PokeLista *lista, int id);
+int pokelista_remover(PokeLista *lista, Pokemon* p);
 
-Pokemon* pokelista_buscar(PokeLista *lista, int id);
+Pokemon* pokelista_buscar(PokeLista *lista, Pokemon *p); //busca por id, mas isso aqui ta considerando que vai encontrar o pokemon pelo id
 
 void pokelista_imprimir(PokeLista *lista);
 
