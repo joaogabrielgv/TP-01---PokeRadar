@@ -15,7 +15,7 @@ typedef struct{
 
 void pokelista_inicializar(PokeLista *lista);
 
-void pokelista_inserir(PokeLista *lista, Pokemon* p);
+int pokelista_inserir(PokeLista *lista, Pokemon* p);
 
 int pokelista_remover(PokeLista *lista, Pokemon* p);
 

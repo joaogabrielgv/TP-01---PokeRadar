@@ -1,5 +1,6 @@
 
 #include <stdio.h>
+#include <string.h>
 #include "Pokemons.h"
 
 void inicializar_pokemon(Pokemon *p, int id, int numpoke, char *nome, char *tipo, Coordenadap localizacaop) {

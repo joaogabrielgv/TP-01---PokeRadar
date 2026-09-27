@@ -15,19 +15,20 @@ void treinador_movimentacao (Treinador *t, int x, int y) {
     t->localizacaot.y = y;
 }
 
-void treinador_capturar_pokemon (Treinador *t, Pokemon p) {
+int treinador_capturar_pokemon (Treinador *t, Pokemon *p) {
     if (t->pokebolas <= 0) {
-        return;
+        return 0;
     }
     else {
         t->pokebolas -= 1;
     }
 
     pokelista_inserir (&t->poke_treinador, p);
+    return 1;
 }
 
-void treinador_remover_pokemon (Treinador *t, int id){
-    pokelista_remover (&t->poke_treinador, id);
+int treinador_remover_pokemon (Treinador *t, Pokemon *p) {
+    return pokelista_remover (&t->poke_treinador, p);
 }
 
 void treinador_imprimir (const Treinador *t) {

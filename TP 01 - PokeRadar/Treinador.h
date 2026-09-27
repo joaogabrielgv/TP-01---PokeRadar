@@ -20,9 +20,9 @@ void treinador_inicializar (Treinador *t, int id, int pokebolas);
 
 void treinador_movimentacao (Treinador *t, int x, int y);
 
-void treinador_capturar_pokemon (Treinador *t, Pokemon p);
+int treinador_capturar_pokemon (Treinador *t, Pokemon *p);
 
-void treinador_remover_pokemon (Treinador *t, int id);
+int treinador_remover_pokemon (Treinador *t, Pokemon *p);
 
 void treinador_imprimir (const Treinador *t);
 

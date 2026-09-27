@@ -16,13 +16,13 @@ typedef struct {
 
 void centro_inicializar (CentroPesquisa *c);
 
-void centro_insercao_fugitivos (CentroPesquisa *c, Pokemon p);
+int centro_insercao_fugitivos (CentroPesquisa *c, Pokemon *p);
 
-void centro_remover_fugitivos (CentroPesquisa *c, int id); 
+int centro_remover_fugitivos (CentroPesquisa *c, Pokemon *p);
 
 void centro_imprimir_fugitivos (const CentroPesquisa *c);
 
-void centro_recebimento_recuperados (CentroPesquisa *c, Pokemon p);
+int centro_recebimento_recuperados (CentroPesquisa *c, Pokemon *p);
 
 void centro_recarga_pokebolas (Treinador *t);
 
