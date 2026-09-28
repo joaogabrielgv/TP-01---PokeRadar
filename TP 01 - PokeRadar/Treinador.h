@@ -16,7 +16,7 @@ typedef struct {
     int pokebolas;
 } Treinador;
 
-void treinador_inicializar (Treinador *t, int id, int pokebolas);
+void treinador_inicializar (Treinador *t, int id, char *nome, int pokebolas);
 
 void treinador_movimentacao (Treinador *t, int x, int y);
 

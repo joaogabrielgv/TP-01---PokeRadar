@@ -2,8 +2,12 @@
 
 #include "Treinador.h"
 
-void treinador_inicializar (Treinador *t, int id, int pokebolas) {
+void treinador_inicializar (Treinador *t, int id, char *nome, int pokebolas) {
     t->id = id;
+
+    strncpy(t->nome, nome, sizeof(t->nome) - 1);
+    t->nome[sizeof(t->nome) - 1] = '\0';
+
     t->localizacaot.x = 0;
     t->localizacaot.y = 0;
     t->pokebolas = pokebolas;
