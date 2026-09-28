@@ -81,6 +81,9 @@ int main (int argc, char *argv[]) {
     while (pAux != NULL) {
         Pokemon pokemon = pAux->pokemon;
 
+        printf ("Pokémon alvo: %s\n", pAux->pokemon.nome);
+        printf ("Localização: (%d,%d)\n", pAux->pokemon.localizacaop.x, pAux->pokemon.localizacaop.y);
+
         int distancia_x1 = pokemon.localizacaop.x - treinador1.localizacaot.x;
         int distancia_y1 = pokemon.localizacaop.y - treinador1.localizacaot.y;
 
@@ -89,6 +92,9 @@ int main (int argc, char *argv[]) {
 
         int distancia_treinador1 = distancia_x1 * distancia_x1 + distancia_y1 * distancia_y1;
         int distancia_treinador2 = distancia_x2 * distancia_x2 + distancia_y2 * distancia_y2;
+
+        printf ("Distância Treinador(a) %s: %.2f\n", treinador1.nome, distancia_treinador1);
+        printf ("Distância Treinador(a) %s: %.2f\n", treinador2.nome, distancia_treinador2);
 
         Treinador *treinador_escolhido;
 
@@ -110,9 +116,17 @@ int main (int argc, char *argv[]) {
             }
         }
 
+        printf ("\nMissão atribuída ao Treinador(a) %s.\n", treinador_escolhido->nome);
+
         treinador_movimentacao(treinador_escolhido, pokemon.localizacaop.x, pokemon.localizacaop.y);
 
+        printf ("\nTreinador(a) %s se movimentou para (%d,%d).\n", treinador_escolhido->nome, treinador_escolhido->localizacaot.x, treinador_escolhido->localizacaot.y); 
+
         treinador_capturar_pokemon(treinador_escolhido, &pokemon);
+
+        printf ("%s capturado com sucesso!\n", pAux->pokemon.nome);
+        printf ("\nPokébolas restantes para o Treinador(a) %s: %d\n", treinador_escolhido->nome, treinador_escolhido->pokebolas);
+        printf ("\n----------------------------------------\n");
 
         pAux = pAux->pProx;
     }
