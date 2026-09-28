@@ -43,11 +43,21 @@ int main (int argc, char *argv[]) {
     treinador_inicializar (&treinador1, id_treinador1, nome_treinador1, pokebolas_treinador1);
     treinador_inicializar (&treinador2, id_treinador2, nome_treinador2, pokebolas_treinador2);
 
+    printf ("========================================\n");
+    printf ("            INÍCIO DA MISSÃO\n");
+    printf ("========================================\n");
+
+    printf ("\nTreinador(a) %s: posição (%d,%d) | Pokébolas: %d\n", treinador1.nome, treinador1.localizacaot.x, treinador1.localizacaot.y, treinador1.pokebolas);
+    printf ("Treinador(a) %s: posição (%d,%d) | Pokébolas: %d\n", treinador2.nome, treinador2.localizacaot.x, treinador2.localizacaot.y, treinador2.pokebolas);
+
     int qnt_pokemons_fugitivos;
 
     fscanf (pEntrada, "%d", &qnt_pokemons_fugitivos);
 
-    for (int i; i < qnt_pokemons_fugitivos; i++) {
+    printf ("\nPokémons fugitivos a serem resgatados: %d\n", qnt_pokemons_fugitivos);
+    printf ("\n----------------------------------------\n");
+
+    for (int i = 0; i < qnt_pokemons_fugitivos; i++) {
         int id_pokemon;
         char nome_pokemon[20];
         char tipo_pokemon[15];
