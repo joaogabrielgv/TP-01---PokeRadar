@@ -47,9 +47,23 @@ int pokelista_remover(PokeLista *Lista, Pokemon *p) {
     return 0;
 }
 
-Pokemon* pokelista_buscar(PokeLista *Lista, Pokemon *p){ //busca por id
-
+Pokemon* pokelista_buscar(PokeLista *Lista, int id){
+        struct Celula* pAux;
+        pAux = Lista->pPrimeiro->pProx;
+        while (pAux != NULL) {
+            if (pAux->pokemon.id == id) {
+                return &(pAux->pokemon); 
+            }
+        pAux = pAux->pProx; 
+    }
+    return NULL;
 }
 
 void pokelista_imprimir(PokeLista *Lista){
+    struct Celula* pAux;
+    pAux = Lista->pPrimeiro->pProx;
+    while(pAux != NULL){
+        printf("Id: %d\nNumero da pokedex: %d\nNome: %s\nTipo: %s\nCoordenada x: %d\nCoordenada y: %d\n", pAux->pokemon.id, pAux->pokemon.numpoke, pAux->pokemon.nome, pAux->pokemon.tipo, pAux->pokemon.localizacaop.x, pAux->pokemon.localizacaop.y);
+        pAux = pAux->pProx; 
+    }
 }

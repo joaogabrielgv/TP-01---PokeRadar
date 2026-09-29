@@ -19,7 +19,7 @@ int pokelista_inserir(PokeLista *lista, Pokemon* p);
 
 int pokelista_remover(PokeLista *lista, Pokemon* p);
 
-Pokemon* pokelista_buscar(PokeLista *lista, Pokemon *p); //busca por id, mas isso aqui ta considerando que vai encontrar o pokemon pelo id
+Pokemon* pokelista_buscar(PokeLista *lista, int id);
 
 void pokelista_imprimir(PokeLista *lista);
 
