@@ -32,7 +32,7 @@ int main (int argc, char *argv[]) {
         pEntrada = fopen (argv[1], "r");
 
         if (pEntrada == NULL) {
-            printf ("Erro ao abrir o arquivo\n");
+            printf ("Erro ao abrir o arquivo. Execute o programa novamente.\n");
             exit (1);
         }
     }
@@ -57,16 +57,20 @@ int main (int argc, char *argv[]) {
     printf ("\nPokémons fugitivos a serem resgatados: %d\n", qnt_pokemons_fugitivos);
     printf ("\n----------------------------------------\n");
 
+    int id_pokemon = 1;
+
     for (int i = 0; i < qnt_pokemons_fugitivos; i++) {
-        int id_pokemon;
+        int numpoke_pokemon;
         char nome_pokemon[20];
         char tipo_pokemon[15];
         Coordenadap coordenada_pokemon;
         Pokemon pokemon;
 
-        fscanf (pEntrada, "%d %s %s %d %d", &id_pokemon, nome_pokemon, tipo_pokemon, &coordenada_pokemon.x, &coordenada_pokemon.y);
+        fscanf (pEntrada, "%d %s %s %d %d", &numpoke_pokemon, nome_pokemon, tipo_pokemon, &coordenada_pokemon.x, &coordenada_pokemon.y);
 
         pokemon_set_id (&pokemon, id_pokemon);
+        id_pokemon++;
+        pokemon_set_numpoke (&pokemon, numpoke_pokemon);
         pokemon_set_nome (&pokemon, nome_pokemon);
         pokemon_set_tipo (&pokemon, tipo_pokemon);
         pokemon_set_localizacao (&pokemon, coordenada_pokemon);
@@ -96,36 +100,36 @@ int main (int argc, char *argv[]) {
         printf ("Distância Treinador(a) %s: %.2f\n", treinador1.nome, distancia_treinador1);
         printf ("Distância Treinador(a) %s: %.2f\n", treinador2.nome, distancia_treinador2);
 
-        Treinador *treinador_escolhido;
+        Treinador *treinador_captura;
 
         if (distancia_treinador1 < distancia_treinador2) {
-            treinador_escolhido = &treinador1;
+            treinador_captura = &treinador1;
         }
 
         else if (distancia_treinador2 < distancia_treinador1) {
-            treinador_escolhido = &treinador2;
+            treinador_captura = &treinador2;
         }
         
         else {
             if (treinador1.id < treinador2.id) {
-                treinador_escolhido = &treinador1;
+                treinador_captura = &treinador1;
             }
         
             else {
-                treinador_escolhido = &treinador2;
+                treinador_captura = &treinador2;
             }
         }
 
-        printf ("\nMissão atribuída ao Treinador(a) %s.\n", treinador_escolhido->nome);
+        printf ("\nMissão atribuída ao Treinador(a) %s.\n", treinador_captura->nome);
 
-        treinador_movimentacao(treinador_escolhido, pokemon.localizacaop.x, pokemon.localizacaop.y);
+        treinador_movimentacao(treinador_captura, pokemon.localizacaop.x, pokemon.localizacaop.y);
 
-        printf ("\nTreinador(a) %s se movimentou para (%d,%d).\n", treinador_escolhido->nome, treinador_escolhido->localizacaot.x, treinador_escolhido->localizacaot.y); 
+        printf ("\nTreinador(a) %s se movimentou para (%d,%d).\n", treinador_captura->nome, treinador_captura->localizacaot.x, treinador_captura->localizacaot.y); 
 
-        treinador_capturar_pokemon(treinador_escolhido, &pokemon);
+        treinador_capturar_pokemon(treinador_captura, &pokemon);
 
         printf ("%s capturado com sucesso!\n", pAux->pokemon.nome);
-        printf ("\nPokébolas restantes para o Treinador(a) %s: %d\n", treinador_escolhido->nome, treinador_escolhido->pokebolas);
+        printf ("\nPokébolas restantes para o Treinador(a) %s: %d\n", treinador_captura->nome, treinador_captura->pokebolas);
         printf ("\n----------------------------------------\n");
 
         pAux = pAux->pProx;
