@@ -1,4 +1,6 @@
 #include <stdio.h>
+#include <stdlib.h>
+
 #include "Pokelista.h"
 
 void pokelista_inicializar(PokeLista * Lista){

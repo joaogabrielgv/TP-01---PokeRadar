@@ -89,6 +89,10 @@ int main (int argc, char *argv[]) {
         if (pArquivoSaida != NULL) {
             fprintf(pArquivoSaida, "Pokemons recuperados: \n");
         }
+        if (pArquivoSaida == NULL) {
+            printf("Erro ao criar o arquivo de saída. Execute o programa novamente.\n");
+            exit(1);
+        }
 
     while (pAux != NULL) {
         PokeCelula *pProximo = pAux->pProx;
@@ -138,21 +142,17 @@ int main (int argc, char *argv[]) {
         printf ("\nTreinador(a) %s se movimentou para (%d,%d).\n", treinador_captura->nome, treinador_captura->localizacaot.x, treinador_captura->localizacaot.y); 
 
         treinador_capturar_pokemon(treinador_captura, &pokemon);
-
         printf ("%s capturado com sucesso!\n", pAux->pokemon.nome);
 
-        if (pArquivoSaida != NULL) {
-            fprintf(pArquivoSaida, "%d %s\n", pokemon.numpoke, pokemon.nome);
-        }
-            centro_remover_fugitivos(&centro, &pokemon);
+        centro_remover_fugitivos(&centro, &pokemon);
         printf ("\nPokébolas restantes para o Treinador(a) %s: %d\n", treinador_captura->nome, treinador_captura->pokebolas);
 
-        if(treinador_captura->pokebolas == 0){
+        if (treinador_captura->pokebolas == 0) {
             printf("======================================== \nTreinador(a) %s SEM POKÉBOLAS \n========================================\n", treinador_captura->nome);
             treinador_movimentacao(treinador_captura, 0, 0);
-            printf("\nTreinador %s retornou ao Centro de Pesquisa\n", treinador_captura->nome);
+            printf("\nTreinador(a) %s retorna ao Centro de Pesquisa\n", treinador_captura->nome);
             
-            printf("Entregando Pokemon ao Centro de Pesquisa");
+            printf("\nEntregando Pokémon ao Centro de Pesquisa\n");
             while(treinador_captura->poke_treinador.pPrimeiro->pProx != NULL){
                 pAuxdevolucao = treinador_captura->poke_treinador.pPrimeiro->pProx->pokemon;
                 pokelista_remover(&treinador_captura->poke_treinador, &pAuxdevolucao);
@@ -160,14 +160,15 @@ int main (int argc, char *argv[]) {
                 }
                 centro_recarga_pokebolas (treinador_captura);
             }
+            printf ("\nTreinador(a) %s recebeu %d Pokébolas.\n", treinador_captura->nome, treinador_captura->pokebolas);
         printf ("\n----------------------------------------\n");
 
         pAux = pProximo;
         }
-        printf("======================================== \nTodos Pokemons foram resgatados \n======================================== \n");
+        printf("\n======================================== \nTodos Pokemons foram resgatados \n======================================== \n");
         treinador_movimentacao(&treinador1, 0, 0);
         treinador_movimentacao(&treinador2, 0, 0);
-        printf("Ambos treinadores retornam ao Centro de Pesquisa.");
+        printf("\nAmbos treinadores retornam ao Centro de Pesquisa.\n");
         while(treinador1.poke_treinador.pPrimeiro->pProx != NULL){
                 pAuxdevolucao = treinador1.poke_treinador.pPrimeiro->pProx->pokemon;
                 pokelista_remover(&treinador1.poke_treinador, &pAuxdevolucao);
@@ -178,6 +179,18 @@ int main (int argc, char *argv[]) {
                 pokelista_remover(&treinador2.poke_treinador, &pAuxdevolucao);
                 centro_recebimento_recuperados(&centro, &pAuxdevolucao);
                 }
+        printf ("\nTreinador(a) %s devolve os Pokémon.\n", treinador1.nome);
+        printf ("\nTreinador(a) %s devolve os Pokémon.\n", treinador2.nome);
+        printf ("========================================\n");
+        printf ("          MISSÃO CONCLUÍDA\n");
+        printf ("========================================\n");
+
+    PokeCelula *pAuxRelatorio = centro.recuperados.pPrimeiro->pProx;
+    while (pAuxRelatorio != NULL) {
+        fprintf(pArquivoSaida, "%d %s\n", pAuxRelatorio->pokemon.numpoke, pAuxRelatorio->pokemon.nome);
+        pAuxRelatorio = pAuxRelatorio->pProx;
+    }
+
     if (pEntrada != stdin) {
         fclose(pEntrada);
     }

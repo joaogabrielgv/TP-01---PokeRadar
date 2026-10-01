@@ -1,7 +1,7 @@
 #include <stdio.h>
+#include <string.h>
 
 #include "Treinador.h"
-#include "Centro_de_Pesquisa.h"
 
 void treinador_inicializar (Treinador *t, int id, char *nome, int pokebolas) {
     t->id = id;
@@ -24,10 +24,11 @@ int treinador_capturar_pokemon (Treinador *t, Pokemon *p) {
     if (t->pokebolas <= 0) {
         return 0;
     }
-    else {
-        t->pokebolas -= 1;
+    if (pokelista_inserir(&t->poke_treinador, p) == 0) {
+        return 0;
     }
 
+    t->pokebolas -= 1;
     pokelista_inserir (&t->poke_treinador, p);
     return 1;
 }
@@ -37,9 +38,9 @@ int treinador_remover_pokemon (Treinador *t, Pokemon *p) {
 }
 
 void treinador_imprimir (const Treinador *t) {
-    printf ("Treinador: %s", t->nome);
-    printf ("Id: %d", t->id);
-    printf ("Localização: (%d, %d)", t->localizacaot.x, t->localizacaot.y);
-    printf ("Pokébolas: %d", t->pokebolas);
+    printf ("Treinador: %s\n", t->nome);
+    printf ("Id: %d\n", t->id);
+    printf ("Localização: (%d, %d)\n", t->localizacaot.x, t->localizacaot.y);
+    printf ("Pokébolas: %d\n", t->pokebolas);
     pokelista_imprimir (&t->poke_treinador); 
 }

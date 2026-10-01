@@ -2,7 +2,6 @@
 #define TREINADOR_H
 
 #include "Pokelista.h"
-#include "Centro_de_Pesquisa.h"
 
 typedef struct {
     int x;
