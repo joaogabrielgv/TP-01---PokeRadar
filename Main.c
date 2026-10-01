@@ -80,12 +80,6 @@ int main (int argc, char *argv[]) {
 
 // 3. Missão de captura
 
-    FILE *pArquivoSaida;
-    pArquivoSaida = fopen("arquivosaida.txt", "w");
-    if (pArquivoSaida != NULL) {
-        fprintf(pArquivoSaida, "Pokemons recuperados: \n");
-    }
-
     PokeCelula *pAux = centro.fugitivos.pPrimeiro->pProx;
 
     while (pAux != NULL) {
@@ -101,8 +95,8 @@ int main (int argc, char *argv[]) {
         int distancia_x2 = pokemon.localizacaop.x - treinador2.localizacaot.x;
         int distancia_y2 = pokemon.localizacaop.y - treinador2.localizacaot.y;
 
-        int distancia_treinador1 = distancia_x1 * distancia_x1 + distancia_y1 * distancia_y1;
-        int distancia_treinador2 = distancia_x2 * distancia_x2 + distancia_y2 * distancia_y2;
+        double distancia_treinador1 = sqrt(distancia_x1 * distancia_x1 + distancia_y1 * distancia_y1);
+        double distancia_treinador2 = sqrt(distancia_x2 * distancia_x2 + distancia_y2 * distancia_y2);
 
         printf ("Distância Treinador(a) %s: %.2f\n", treinador1.nome, distancia_treinador1);
         printf ("Distância Treinador(a) %s: %.2f\n", treinador2.nome, distancia_treinador2);
@@ -136,6 +130,12 @@ int main (int argc, char *argv[]) {
         treinador_capturar_pokemon(treinador_captura, &pokemon);
 
         printf ("%s capturado com sucesso!\n", pAux->pokemon.nome);
+
+        FILE *pArquivoSaida;
+        pArquivoSaida = fopen("relatorio.txt", "w");
+        if (pArquivoSaida != NULL) {
+            fprintf(pArquivoSaida, "Pokemons recuperados: \n");
+        }
         if (pArquivoSaida != NULL) {
                 fprintf(pArquivoSaida, "%d %s\n", pAux->pokemon.numpoke, pAux->pokemon.nome);
             } 

@@ -1,7 +1,7 @@
 #ifndef POKELISTA_H
 #define POKELISTA_H
 
-#include "pokemons.h"
+#include "Pokemons.h"
 
 typedef struct Celula {
     Pokemon pokemon;

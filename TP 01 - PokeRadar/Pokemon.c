@@ -13,7 +13,7 @@ void inicializar_pokemon(Pokemon *p, int id, int numpoke, char *nome, char *tipo
     p->localizacaop = localizacaop;
 }
 
-void pokemon_imprime(Pokemon *p){
+void pokemon_imprimir(Pokemon *p){
     /*Essa função imprime só no output?*/
     printf("id: %d \n numero na pokedex: %d \n nome: %s \n tipo: %s \n Coordenada x: %d \n Coordenada y: %d \n", p->id, p->numpoke, p->nome, p->tipo, p->localizacaop.x, p->localizacaop.y);
 }
