@@ -1,12 +1,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <time.h>
 #include <math.h>
 #include "Centro_de_Pesquisa.h"
 
 int main (int argc, char *argv[]) {
 // 1. Inicialização
-
+    srand(time(NULL));
     CentroPesquisa centro;
     Treinador treinador1;
     Treinador treinador2;
@@ -81,11 +82,19 @@ int main (int argc, char *argv[]) {
 // 3. Missão de captura
 
     PokeCelula *pAux = centro.fugitivos.pPrimeiro->pProx;
+    Pokemon pAuxdevolucao;
+
+        FILE *pArquivoSaida; //Abrindo o arquivo de saída aqui
+        pArquivoSaida = fopen("relatorio.txt", "w");
+        if (pArquivoSaida != NULL) {
+            fprintf(pArquivoSaida, "Pokemons recuperados: \n");
+        }
 
     while (pAux != NULL) {
         PokeCelula *pProximo = pAux->pProx;
         Pokemon pokemon = pAux->pokemon;
-        
+    
+
         printf ("Pokémon alvo: %s\n", pAux->pokemon.nome);
         printf ("Localização: (%d,%d)\n", pAux->pokemon.localizacaop.x, pAux->pokemon.localizacaop.y);
 
@@ -119,7 +128,8 @@ int main (int argc, char *argv[]) {
             else {
                 treinador_captura = &treinador2;
             }
-        }
+        }   
+
 
         printf ("\nMissão atribuída ao Treinador(a) %s.\n", treinador_captura->nome);
 
@@ -131,20 +141,48 @@ int main (int argc, char *argv[]) {
 
         printf ("%s capturado com sucesso!\n", pAux->pokemon.nome);
 
-        FILE *pArquivoSaida;
-        pArquivoSaida = fopen("relatorio.txt", "w");
         if (pArquivoSaida != NULL) {
-            fprintf(pArquivoSaida, "Pokemons recuperados: \n");
+            fprintf(pArquivoSaida, "%d %s\n", pokemon.numpoke, pokemon.nome);
         }
-        if (pArquivoSaida != NULL) {
-                fprintf(pArquivoSaida, "%d %s\n", pAux->pokemon.numpoke, pAux->pokemon.nome);
-            } 
             centro_remover_fugitivos(&centro, &pokemon);
         printf ("\nPokébolas restantes para o Treinador(a) %s: %d\n", treinador_captura->nome, treinador_captura->pokebolas);
+
+        if(treinador_captura->pokebolas == 0){
+            printf("======================================== \nTreinador(a) %s SEM POKÉBOLAS \n========================================\n", treinador_captura->nome);
+            treinador_movimentacao(treinador_captura, 0, 0);
+            printf("\nTreinador %s retornou ao Centro de Pesquisa\n", treinador_captura->nome);
+            
+            printf("Entregando Pokemon ao Centro de Pesquisa");
+            while(treinador_captura->poke_treinador.pPrimeiro->pProx != NULL){
+                pAuxdevolucao = treinador_captura->poke_treinador.pPrimeiro->pProx->pokemon;
+                pokelista_remover(&treinador_captura->poke_treinador, &pAuxdevolucao);
+                centro_recebimento_recuperados(&centro, &pAuxdevolucao);
+                }
+                centro_recarga_pokebolas (treinador_captura);
+            }
         printf ("\n----------------------------------------\n");
 
-        pAux = pAux->pProx;
+        pAux = pProximo;
+        }
+        printf("======================================== \nTodos Pokemons foram resgatados \n======================================== \n");
+        treinador_movimentacao(&treinador1, 0, 0);
+        treinador_movimentacao(&treinador2, 0, 0);
+        printf("Ambos treinadores retornam ao Centro de Pesquisa.");
+        while(treinador1.poke_treinador.pPrimeiro->pProx != NULL){
+                pAuxdevolucao = treinador1.poke_treinador.pPrimeiro->pProx->pokemon;
+                pokelista_remover(&treinador1.poke_treinador, &pAuxdevolucao);
+                centro_recebimento_recuperados(&centro, &pAuxdevolucao);
+                }
+        while(treinador2.poke_treinador.pPrimeiro->pProx != NULL){
+                pAuxdevolucao = treinador2.poke_treinador.pPrimeiro->pProx->pokemon;
+                pokelista_remover(&treinador2.poke_treinador, &pAuxdevolucao);
+                centro_recebimento_recuperados(&centro, &pAuxdevolucao);
+                }
+    if (pEntrada != stdin) {
+        fclose(pEntrada);
     }
-
-    return 0;
+    if (pArquivoSaida != NULL) {
+        fclose(pArquivoSaida);
+    }               
+    return 0; 
 }

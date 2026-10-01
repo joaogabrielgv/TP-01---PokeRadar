@@ -27,6 +27,4 @@ int treinador_remover_pokemon (Treinador *t, Pokemon *p);
 
 void treinador_imprimir (const Treinador *t);
 
-void treinador_retornar_ao_centro(Treinador *t, CentroPesquisa *c, int pokebolas);
-
 #endif
