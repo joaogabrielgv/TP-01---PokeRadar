@@ -4,6 +4,22 @@
 #include <math.h>
 #include "Centro_de_Pesquisa.h"
 
+void treinador_retornar_ao_centro(Treinador *t, CentroPesquisa *c, int pokebolas) {
+    printf("\nTreinador %s retornou ao Centro de Pesquisa\n", t->nome);
+    
+    Pokemon pAux;
+    while (t->poke_treinador.pPrimeiro->pProx != NULL) {
+        pAux = t->poke_treinador.pPrimeiro->pProx->pokemon;
+        pokelista_remover(&t->poke_treinador, &pAux);
+        centro_insercao_recuperados(c, &pAux);
+        printf("Pokémon %s entregue ao Centro de Pesquisa.\n", pAux.nome);
+    }
+    if (t->pokebolas == 0 && pokebolas > 0) {
+        t->pokebolas = pokebolas;
+        printf("Pokébolas recarregadas para %d\n", t->pokebolas);
+    }
+    treinador_movimentacao(t, 0, 0);
+}
 int main (int argc, char *argv[]) {
 // 1. Inicialização
 
@@ -80,11 +96,18 @@ int main (int argc, char *argv[]) {
 
 // 3. Missão de captura
 
+    FILE *pArquivoSaida;
+    pArquivoSaida = fopen("arquivosaida.txt", "w");
+    if (pArquivoSaida != NULL) {
+        fprintf(pArquivoSaida, "Pokemons recuperados: \n");
+    }
+
     PokeCelula *pAux = centro.fugitivos.pPrimeiro->pProx;
 
     while (pAux != NULL) {
+        PokeCelula *pProximo = pAux->pProx;
         Pokemon pokemon = pAux->pokemon;
-
+        
         printf ("Pokémon alvo: %s\n", pAux->pokemon.nome);
         printf ("Localização: (%d,%d)\n", pAux->pokemon.localizacaop.x, pAux->pokemon.localizacaop.y);
 
@@ -129,6 +152,10 @@ int main (int argc, char *argv[]) {
         treinador_capturar_pokemon(treinador_captura, &pokemon);
 
         printf ("%s capturado com sucesso!\n", pAux->pokemon.nome);
+        if (pArquivoSaida != NULL) {
+                fprintf(pArquivoSaida, "%d %s\n", pAux->pokemon.numpoke, pAux->pokemon.nome);
+            } 
+            centro_remover_fugitivos(&centro, &pokemon);
         printf ("\nPokébolas restantes para o Treinador(a) %s: %d\n", treinador_captura->nome, treinador_captura->pokebolas);
         printf ("\n----------------------------------------\n");
 
