@@ -2,6 +2,7 @@
 #define TREINADOR_H
 
 #include "Pokelista.h"
+#include "Centro_de_Pesquisa.h"
 
 typedef struct {
     int x;
@@ -25,5 +26,7 @@ int treinador_capturar_pokemon (Treinador *t, Pokemon *p);
 int treinador_remover_pokemon (Treinador *t, Pokemon *p);
 
 void treinador_imprimir (const Treinador *t);
+
+void treinador_retornar_ao_centro(Treinador *t, CentroPesquisa *c, int pokebolas);
 
 #endif

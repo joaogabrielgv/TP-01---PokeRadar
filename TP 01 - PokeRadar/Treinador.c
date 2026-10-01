@@ -1,6 +1,7 @@
 #include <stdio.h>
 
 #include "Treinador.h"
+#include "Centro_de_Pesquisa.h"
 
 void treinador_inicializar (Treinador *t, int id, char *nome, int pokebolas) {
     t->id = id;
@@ -41,4 +42,21 @@ void treinador_imprimir (const Treinador *t) {
     printf ("Localização: (%d, %d)", t->localizacaot.x, t->localizacaot.y);
     printf ("Pokébolas: %d", t->pokebolas);
     pokelista_imprimir (&t->poke_treinador); 
+}
+
+void treinador_retornar_ao_centro(Treinador *t, CentroPesquisa *c, int pokebolas) {
+    printf("\nTreinador %s retornou ao Centro de Pesquisa\n", t->nome);
+    
+    Pokemon pAux;
+    while (t->poke_treinador.pPrimeiro->pProx != NULL) {
+        pAux = t->poke_treinador.pPrimeiro->pProx->pokemon;
+        pokelista_remover(&t->poke_treinador, &pAux);
+        centro_insercao_recuperados(c, &pAux);
+        printf("Pokémon %s entregue ao Centro de Pesquisa.\n", pAux.nome);
+    }
+    if (t->pokebolas == 0 && pokebolas > 0) {
+        t->pokebolas = pokebolas;
+        printf("Pokébolas recarregadas para %d\n", t->pokebolas);
+    }
+    treinador_movimentacao(t, 0, 0);
 }
