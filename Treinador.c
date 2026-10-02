@@ -3,6 +3,8 @@
 
 #include "Treinador.h"
 
+// TAD 3 - TREINADOR (IMPLEMENTAÇÃO)
+
 void treinador_inicializar (Treinador *t, int id, char *nome, int pokebolas) {
     t->id = id;
 

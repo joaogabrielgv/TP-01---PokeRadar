@@ -7,6 +7,7 @@
 
 int main (int argc, char *argv[]) {
 // 1. Inicialização
+
     srand(time(NULL));
     CentroPesquisa centro;
     Treinador treinador1;
@@ -84,7 +85,7 @@ int main (int argc, char *argv[]) {
     PokeCelula *pAux = centro.fugitivos.pPrimeiro->pProx;
     Pokemon pAuxdevolucao;
 
-        FILE *pArquivoSaida; //Abrindo o arquivo de saída
+        FILE *pArquivoSaida; // Abrindo o arquivo de saída
         pArquivoSaida = fopen("relatorio.txt", "w");
         if (pArquivoSaida != NULL) {
             fprintf(pArquivoSaida, "Pokemons recuperados: \n");
@@ -144,28 +145,39 @@ int main (int argc, char *argv[]) {
         treinador_capturar_pokemon(treinador_captura, &pokemon);
         printf ("%s capturado com sucesso!\n", pAux->pokemon.nome);
 
+// 4. Atualização da listagem de fugas
+
         centro_remover_fugitivos(&centro, &pokemon);
         printf ("\nPokebolas restantes para o Treinador(a) %s: %d\n", treinador_captura->nome, treinador_captura->pokebolas);
 
+// 5. Retorno ao Centro de Pesquisa - Treinador sem Pokébolas
+
         if (treinador_captura->pokebolas == 0) {
+
             printf("\n======================================== \nTreinador(a) %s SEM POKEBOLAS \n========================================\n", treinador_captura->nome);
             treinador_movimentacao(treinador_captura, 0, 0);
             printf("\nTreinador(a) %s retorna ao Centro de Pesquisa\n", treinador_captura->nome);
-            
             printf("\nEntregando Pokemon ao Centro de Pesquisa\n");
-            while(treinador_captura->poke_treinador.pPrimeiro->pProx != NULL){
+
+            while (treinador_captura->poke_treinador.pPrimeiro->pProx != NULL){
                 pAuxdevolucao = treinador_captura->poke_treinador.pPrimeiro->pProx->pokemon;
                 pokelista_remover(&treinador_captura->poke_treinador, &pAuxdevolucao);
                 centro_recebimento_recuperados(&centro, &pAuxdevolucao);
             }
 
             centro_recarga_pokebolas (treinador_captura);
-            printf ("\nTreinador(a) %s recebeu %d Pokebolas.\n", treinador_captura->nome, treinador_captura->pokebolas);
-            }
+            printf ("\nTreinador(a) %s recebeu %d Pokebolas.\n", treinador_captura->nome, treinador_captura->pokebolas); 
+
+        }
+
         printf ("\n----------------------------------------\n");
 
         pAux = pProximo;
+
         }
+
+// 5.1 Retorno ao Centro de Pesquisa - Todos Pokémons resgatados
+
         printf("\n======================================== \n    Todos Pokemons foram resgatados \n======================================== \n");
         
         treinador_movimentacao(&treinador1, 0, 0);
@@ -173,21 +185,25 @@ int main (int argc, char *argv[]) {
 
         printf("\nAmbos treinadores retornam ao Centro de Pesquisa.\n");
 
-        while(treinador1.poke_treinador.pPrimeiro->pProx != NULL){
+        while (treinador1.poke_treinador.pPrimeiro->pProx != NULL) {
                 pAuxdevolucao = treinador1.poke_treinador.pPrimeiro->pProx->pokemon;
                 pokelista_remover(&treinador1.poke_treinador, &pAuxdevolucao);
                 centro_recebimento_recuperados(&centro, &pAuxdevolucao);
-                }
+        }
+
         while(treinador2.poke_treinador.pPrimeiro->pProx != NULL){
                 pAuxdevolucao = treinador2.poke_treinador.pPrimeiro->pProx->pokemon;
                 pokelista_remover(&treinador2.poke_treinador, &pAuxdevolucao);
                 centro_recebimento_recuperados(&centro, &pAuxdevolucao);
-                }
+        }
+
         printf ("\nTreinador(a) %s devolve os Pokemon.\n", treinador1.nome);
         printf ("\nTreinador(a) %s devolve os Pokemon.\n", treinador2.nome);
         printf ("\n========================================\n");
         printf ("          MISSAO CONCLUIDA\n");
         printf ("========================================\n");
+
+// 6. Imprimir pokémons recuperados
 
     PokeCelula *pAuxRelatorio = centro.recuperados.pPrimeiro->pProx;
     while (pAuxRelatorio != NULL) {
@@ -198,8 +214,10 @@ int main (int argc, char *argv[]) {
     if (pEntrada != stdin) {
         fclose(pEntrada);
     }
+
     if (pArquivoSaida != NULL) {
         fclose(pArquivoSaida);
-    }               
+    }      
+
     return 0; 
 }

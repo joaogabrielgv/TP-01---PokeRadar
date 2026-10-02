@@ -3,6 +3,8 @@
 
 #include "Treinador.h"
 
+// TAD 4 - CENTRO DE PESQUISA (HEADER) 
+
 typedef struct {
     int x;
     int y;

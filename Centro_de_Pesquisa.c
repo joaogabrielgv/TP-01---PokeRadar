@@ -3,6 +3,8 @@
 
 #include "Centro_de_Pesquisa.h"
 
+// TAD 4 - CENTRO DE PESQUISA (IMPLEMENTAÇÃO)
+
 void centro_inicializar (CentroPesquisa *c) {
     c->localizacaoc.x=0;
     c->localizacaoc.y=0;

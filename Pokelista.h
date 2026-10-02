@@ -3,15 +3,17 @@
 
 #include "Pokemons.h"
 
+// TAD 2 - POKELISTA (HEADER) 
+
 typedef struct Celula {
     Pokemon pokemon;
     struct Celula *pProx;
 } PokeCelula;
 
-typedef struct{
+typedef struct {
     struct Celula *pPrimeiro;
     struct Celula *pUltimo;
-}PokeLista;
+} PokeLista;
 
 void pokelista_inicializar(PokeLista *lista);
 

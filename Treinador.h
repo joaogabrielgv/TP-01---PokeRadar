@@ -3,6 +3,8 @@
 
 #include "Pokelista.h"
 
+// TAD 3 - TREINADOR (HEADER) 
+
 typedef struct {
     int x;
     int y;

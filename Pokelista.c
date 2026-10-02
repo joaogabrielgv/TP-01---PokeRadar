@@ -3,6 +3,8 @@
 
 #include "Pokelista.h"
 
+// TAD 2 - POKELISTA (IMPLEMENTAÇÃO)
+
 void pokelista_inicializar(PokeLista * Lista){
     Lista->pPrimeiro = (struct Celula *)  malloc(sizeof(PokeCelula));
     Lista->pUltimo = Lista->pPrimeiro;
@@ -49,7 +51,7 @@ int pokelista_remover(PokeLista *Lista, Pokemon *p) {
     return 0;
 }
 
-Pokemon* pokelista_buscar(PokeLista *Lista, int id){
+Pokemon* pokelista_buscar(PokeLista *Lista, int id) {
         struct Celula* pAux;
         pAux = Lista->pPrimeiro->pProx;
         while (pAux != NULL) {
@@ -61,7 +63,7 @@ Pokemon* pokelista_buscar(PokeLista *Lista, int id){
     return NULL;
 }
 
-void pokelista_imprimir(PokeLista *Lista){
+void pokelista_imprimir(PokeLista *Lista) {
     struct Celula* pAux;
     pAux = Lista->pPrimeiro->pProx;
     while(pAux != NULL){

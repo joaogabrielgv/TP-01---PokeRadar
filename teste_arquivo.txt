@@ -1,0 +1,14 @@
+Ethan 4
+Cynthia 5
+10
+059 Arcanine Fogo 3 8
+147 Dratine Dragão -2 5
+383 Groundon Terra 9 4
+286 Breloom Planta 6 10
+039 Jigglypuff Fada 0 3
+097 Hypno Psíquico -4 -8
+807 Zeraora Elétrico 5 7
+009 Blastoise Água 3 -10
+453 Croagunk Veneno 1 0
+001 Bulbasaur Planta 12 4
+

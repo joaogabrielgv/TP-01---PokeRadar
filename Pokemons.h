@@ -1,6 +1,8 @@
 #ifndef POKEMONS_H
 #define POKEMONS_H
 
+// TAD 1 - POKÉMON (HEADER) 
+
 typedef struct {
     int x;
     int y;
