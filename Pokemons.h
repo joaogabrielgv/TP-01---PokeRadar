@@ -22,10 +22,10 @@ void pokemon_set_id(Pokemon *p, int id);
 int pokemon_get_numpoke(Pokemon *p);
 void pokemon_set_numpoke(Pokemon *p, int numpoke);
 
-char pokemon_get_nome(Pokemon *p);
+void pokemon_get_nome(Pokemon *p, char *nome, int tamanho);
 void pokemon_set_nome(Pokemon *p, char *nome);
 
-char pokemon_get_tipo(Pokemon *p, char *tipo);
+void pokemon_get_tipo(Pokemon *p, char *tipo, int tamanho);
 void pokemon_set_tipo(Pokemon *p, char *tipo);
 
 Coordenadap pokemon_get_localizacao(Pokemon *p);

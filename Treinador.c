@@ -29,7 +29,7 @@ int treinador_capturar_pokemon (Treinador *t, Pokemon *p) {
     }
 
     t->pokebolas -= 1;
-    pokelista_inserir (&t->poke_treinador, p);
+
     return 1;
 }
 

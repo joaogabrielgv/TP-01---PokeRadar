@@ -45,17 +45,17 @@ int main (int argc, char *argv[]) {
     treinador_inicializar (&treinador2, id_treinador2, nome_treinador2, pokebolas_treinador2);
 
     printf ("========================================\n");
-    printf ("            INÍCIO DA MISSÃO\n");
+    printf ("            INICIO DA MISSAO\n");
     printf ("========================================\n");
 
-    printf ("\nTreinador(a) %s: posição (%d,%d) | Pokébolas: %d\n", treinador1.nome, treinador1.localizacaot.x, treinador1.localizacaot.y, treinador1.pokebolas);
-    printf ("Treinador(a) %s: posição (%d,%d) | Pokébolas: %d\n", treinador2.nome, treinador2.localizacaot.x, treinador2.localizacaot.y, treinador2.pokebolas);
+    printf ("\nTreinador(a) %s: posicao (%d,%d) | Pokebolas: %d\n", treinador1.nome, treinador1.localizacaot.x, treinador1.localizacaot.y, treinador1.pokebolas);
+    printf ("Treinador(a) %s: posicao (%d,%d) | Pokebolas: %d\n", treinador2.nome, treinador2.localizacaot.x, treinador2.localizacaot.y, treinador2.pokebolas);
 
     int qnt_pokemons_fugitivos;
 
     fscanf (pEntrada, "%d", &qnt_pokemons_fugitivos);
 
-    printf ("\nPokémons fugitivos a serem resgatados: %d\n", qnt_pokemons_fugitivos);
+    printf ("\nPokemons fugitivos a serem resgatados: %d\n", qnt_pokemons_fugitivos);
     printf ("\n----------------------------------------\n");
 
     int id_pokemon = 1;
@@ -84,13 +84,13 @@ int main (int argc, char *argv[]) {
     PokeCelula *pAux = centro.fugitivos.pPrimeiro->pProx;
     Pokemon pAuxdevolucao;
 
-        FILE *pArquivoSaida; //Abrindo o arquivo de saída aqui
+        FILE *pArquivoSaida; //Abrindo o arquivo de saída
         pArquivoSaida = fopen("relatorio.txt", "w");
         if (pArquivoSaida != NULL) {
             fprintf(pArquivoSaida, "Pokemons recuperados: \n");
         }
         if (pArquivoSaida == NULL) {
-            printf("Erro ao criar o arquivo de saída. Execute o programa novamente.\n");
+            printf("Erro ao criar o arquivo de saida. Execute o programa novamente.\n");
             exit(1);
         }
 
@@ -99,8 +99,8 @@ int main (int argc, char *argv[]) {
         Pokemon pokemon = pAux->pokemon;
     
 
-        printf ("Pokémon alvo: %s\n", pAux->pokemon.nome);
-        printf ("Localização: (%d,%d)\n", pAux->pokemon.localizacaop.x, pAux->pokemon.localizacaop.y);
+        printf ("Pokemon alvo: %s\n", pAux->pokemon.nome);
+        printf ("Localizacao: (%d,%d)\n", pAux->pokemon.localizacaop.x, pAux->pokemon.localizacaop.y);
 
         int distancia_x1 = pokemon.localizacaop.x - treinador1.localizacaot.x;
         int distancia_y1 = pokemon.localizacaop.y - treinador1.localizacaot.y;
@@ -111,8 +111,8 @@ int main (int argc, char *argv[]) {
         double distancia_treinador1 = sqrt(distancia_x1 * distancia_x1 + distancia_y1 * distancia_y1);
         double distancia_treinador2 = sqrt(distancia_x2 * distancia_x2 + distancia_y2 * distancia_y2);
 
-        printf ("Distância Treinador(a) %s: %.2f\n", treinador1.nome, distancia_treinador1);
-        printf ("Distância Treinador(a) %s: %.2f\n", treinador2.nome, distancia_treinador2);
+        printf ("\nDistancia Treinador(a) %s: %.2f\n", treinador1.nome, distancia_treinador1);
+        printf ("Distancia Treinador(a) %s: %.2f\n", treinador2.nome, distancia_treinador2);
 
         Treinador *treinador_captura;
 
@@ -135,7 +135,7 @@ int main (int argc, char *argv[]) {
         }   
 
 
-        printf ("\nMissão atribuída ao Treinador(a) %s.\n", treinador_captura->nome);
+        printf ("\nMissao atribuida ao Treinador(a) %s.\n", treinador_captura->nome);
 
         treinador_movimentacao(treinador_captura, pokemon.localizacaop.x, pokemon.localizacaop.y);
 
@@ -145,30 +145,34 @@ int main (int argc, char *argv[]) {
         printf ("%s capturado com sucesso!\n", pAux->pokemon.nome);
 
         centro_remover_fugitivos(&centro, &pokemon);
-        printf ("\nPokébolas restantes para o Treinador(a) %s: %d\n", treinador_captura->nome, treinador_captura->pokebolas);
+        printf ("\nPokebolas restantes para o Treinador(a) %s: %d\n", treinador_captura->nome, treinador_captura->pokebolas);
 
         if (treinador_captura->pokebolas == 0) {
-            printf("======================================== \nTreinador(a) %s SEM POKÉBOLAS \n========================================\n", treinador_captura->nome);
+            printf("\n======================================== \nTreinador(a) %s SEM POKEBOLAS \n========================================\n", treinador_captura->nome);
             treinador_movimentacao(treinador_captura, 0, 0);
             printf("\nTreinador(a) %s retorna ao Centro de Pesquisa\n", treinador_captura->nome);
             
-            printf("\nEntregando Pokémon ao Centro de Pesquisa\n");
+            printf("\nEntregando Pokemon ao Centro de Pesquisa\n");
             while(treinador_captura->poke_treinador.pPrimeiro->pProx != NULL){
                 pAuxdevolucao = treinador_captura->poke_treinador.pPrimeiro->pProx->pokemon;
                 pokelista_remover(&treinador_captura->poke_treinador, &pAuxdevolucao);
                 centro_recebimento_recuperados(&centro, &pAuxdevolucao);
-                }
-                centro_recarga_pokebolas (treinador_captura);
             }
-            printf ("\nTreinador(a) %s recebeu %d Pokébolas.\n", treinador_captura->nome, treinador_captura->pokebolas);
+
+            centro_recarga_pokebolas (treinador_captura);
+            printf ("\nTreinador(a) %s recebeu %d Pokebolas.\n", treinador_captura->nome, treinador_captura->pokebolas);
+            }
         printf ("\n----------------------------------------\n");
 
         pAux = pProximo;
         }
-        printf("\n======================================== \nTodos Pokemons foram resgatados \n======================================== \n");
+        printf("\n======================================== \n    Todos Pokemons foram resgatados \n======================================== \n");
+        
         treinador_movimentacao(&treinador1, 0, 0);
         treinador_movimentacao(&treinador2, 0, 0);
+
         printf("\nAmbos treinadores retornam ao Centro de Pesquisa.\n");
+
         while(treinador1.poke_treinador.pPrimeiro->pProx != NULL){
                 pAuxdevolucao = treinador1.poke_treinador.pPrimeiro->pProx->pokemon;
                 pokelista_remover(&treinador1.poke_treinador, &pAuxdevolucao);
@@ -179,10 +183,10 @@ int main (int argc, char *argv[]) {
                 pokelista_remover(&treinador2.poke_treinador, &pAuxdevolucao);
                 centro_recebimento_recuperados(&centro, &pAuxdevolucao);
                 }
-        printf ("\nTreinador(a) %s devolve os Pokémon.\n", treinador1.nome);
-        printf ("\nTreinador(a) %s devolve os Pokémon.\n", treinador2.nome);
-        printf ("========================================\n");
-        printf ("          MISSÃO CONCLUÍDA\n");
+        printf ("\nTreinador(a) %s devolve os Pokemon.\n", treinador1.nome);
+        printf ("\nTreinador(a) %s devolve os Pokemon.\n", treinador2.nome);
+        printf ("\n========================================\n");
+        printf ("          MISSAO CONCLUIDA\n");
         printf ("========================================\n");
 
     PokeCelula *pAuxRelatorio = centro.recuperados.pPrimeiro->pProx;

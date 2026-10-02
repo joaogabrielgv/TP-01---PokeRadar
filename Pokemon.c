@@ -19,16 +19,19 @@ void pokemon_imprimir(Pokemon *p){
 }
 
 /*Só get e set embaixo*/
-char pokemon_get_nome(Pokemon *p){
-    return p->nome;
+void pokemon_get_nome(Pokemon *p, char *nome, int tamanho) {
+    strncpy(nome, p->nome, tamanho - 1);
+    nome[tamanho - 1] = '\0';
 }
 void pokemon_set_nome(Pokemon *p, char *nome){
     strcpy(p->nome, nome);
 }
 
-char pokemon_get_tipo(Pokemon *p, char *tipo){
-    return p->tipo;
+void pokemon_get_tipo(Pokemon *p, char *tipo, int tamanho) {
+    strncpy(tipo, p->tipo, tamanho - 1);
+    tipo[tamanho - 1] = '\0';
 }
+
 void pokemon_set_tipo(Pokemon *p, char *tipo){
     strcpy(p->tipo, tipo);
 }
