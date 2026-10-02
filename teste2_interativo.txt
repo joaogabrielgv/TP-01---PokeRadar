@@ -1,0 +1,8 @@
+Ash 2
+Misty 0
+5
+132 Ditto Normal 9 5
+027 Sabdshrew Terra 2 6
+375 Metang Metal 0 -3
+273 Seedot Planta 14 11
+778 Mimikyu Fantasma -6 -9

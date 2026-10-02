@@ -3,6 +3,8 @@
 #include <string.h>
 #include <time.h>
 #include <math.h>
+#define menor_id 1
+#define maior_id 2
 #include "Centro_de_Pesquisa.h"
 
 int main (int argc, char *argv[]) {
@@ -17,8 +19,8 @@ int main (int argc, char *argv[]) {
 
 // 2. Registro de informações dos treinadores e Pokémon fugitivos
 
-    int id_treinador1 = 1;
-    int id_treinador2 = 2;
+    int id_treinador1 = menor_id;
+    int id_treinador2 = maior_id;
     char nome_treinador1[20];
     char nome_treinador2[20];
     int pokebolas_treinador1;
@@ -59,7 +61,7 @@ int main (int argc, char *argv[]) {
     printf ("\nPokemons fugitivos a serem resgatados: %d\n", qnt_pokemons_fugitivos);
     printf ("\n----------------------------------------\n");
 
-    int id_pokemon = 1;
+    int id_pokemon = menor_id;
 
     for (int i = 0; i < qnt_pokemons_fugitivos; i++) {
         int numpoke_pokemon;
